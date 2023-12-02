@@ -1,10 +1,33 @@
 import React from 'react';
 import styles from './Auth.module.scss';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, notification } from 'antd';
+import { LoginFormDTO } from '@/api/dto/auth.dto';
+
+import * as Api from '@/api';
+import { setCookie } from 'nookies';
 
 const LoginForm = () => {
-    const onSubmit = (values) => {
-        console.log(values);
+    const onSubmit = async (values: LoginFormDTO) => {
+        try {
+            const { token } = await Api.auth.login(values);
+
+            notification.success({
+                message: 'Succes',
+                description: 'Go to admin panel...',
+                duration: 2,
+            });
+
+            setCookie(null, '_token', token, {
+                path: '/',
+            });
+        } catch (err) {
+            console.warn('LoginForm', err);
+            notification.error({
+                message: 'Error',
+                description: 'Wrong login or password',
+                duration: 2,
+            });
+        }
     };
     return (
         <div className={styles.formBlock}>
