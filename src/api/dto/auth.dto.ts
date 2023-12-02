@@ -6,3 +6,6 @@ export interface LoginFormDTO {
 export interface LoginResponseDTO {
     token: string;
 }
+
+export type RegisterFormDTO = LoginFormDTO & { fullname: string };
+export type RegisterResponseDTO = LoginResponseDTO;
