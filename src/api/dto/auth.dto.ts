@@ -9,3 +9,9 @@ export interface LoginResponseDTO {
 
 export type RegisterFormDTO = LoginFormDTO & { fullname: string };
 export type RegisterResponseDTO = LoginResponseDTO;
+
+export interface User {
+    id: number;
+    email: string;
+    fullName: string;
+}
