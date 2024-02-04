@@ -5,6 +5,7 @@ const nextConfig = {
         'antd',
         'rc-util',
         '@babel/runtime',
+        '@babel/runtime/helpers',
         '@ant-design/icons',
         '@ant-design/icons-svg',
         'rc-pagination',
@@ -13,5 +14,4 @@ const nextConfig = {
         'rc-table',
     ],
 };
-
-module.exports = nextConfig;
+export default nextConfig;
