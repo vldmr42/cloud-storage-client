@@ -1,14 +1,18 @@
 import { GetServerSidePropsContext, NextPage } from 'next';
 import { checkAuth } from '@/utils/checkAuth';
-import { Header } from '@/components/Header';
+import React from 'react';
+import Layout from '@/layouts/Layout';
 
 const DashboardPage: NextPage = () => {
     return (
         <main>
-            <Header />
             <h1>Dashboard</h1>
         </main>
     );
+};
+
+DashboardPage.getLayout = (page: React.ReactNode) => {
+    return <Layout title="Dashboard">{page}</Layout>;
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {

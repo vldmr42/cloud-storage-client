@@ -4,9 +4,18 @@ import styles from './Header.module.scss';
 import { CloudOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 
+import * as Api from '@/api';
+
 export const Header: React.FC = () => {
     const router = useRouter();
     const selectedMenu = router.pathname;
+
+    const onClickLogout = () => {
+        if (window.confirm('Are you really want to logout?')) {
+            Api.auth.logout();
+            location.href = '/';
+        }
+    };
     return (
         <Layout.Header className={styles.root}>
             <div className={styles.headerInner}>
@@ -30,7 +39,15 @@ export const Header: React.FC = () => {
                 <div className={styles.headerRight}>
                     <Popover
                         trigger="click"
-                        content={<Button type="primary">Exit</Button>}
+                        content={
+                            <Button
+                                onClick={onClickLogout}
+                                type="primary"
+                                danger
+                            >
+                                Exit
+                            </Button>
+                        }
                     >
                         <Avatar>A</Avatar>
                     </Popover>

@@ -20,6 +20,7 @@ const LoginForm = () => {
             setCookie(null, '_token', token, {
                 path: '/',
             });
+            location.href = '/dashboard';
         } catch (err) {
             console.warn('LoginForm', err);
             notification.error({
