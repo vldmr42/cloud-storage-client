@@ -10,6 +10,7 @@ import {
     FileImageOutlined,
     FileOutlined,
 } from '@ant-design/icons';
+import UploadButton from '@/components/UploadButton';
 
 const DashboardPage: NextPage = () => {
     const router = useRouter();
@@ -18,7 +19,7 @@ const DashboardPage: NextPage = () => {
     return (
         <main className={styles.dashboardContainer}>
             <div className={styles.sidebar}>
-                <Button>Upload</Button>
+                <UploadButton />
                 <Menu
                     className={styles.menu}
                     mode="inline"
