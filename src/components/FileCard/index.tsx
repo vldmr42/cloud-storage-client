@@ -25,7 +25,7 @@ const FileCard: React.FC<FileCardProps> = ({ originalName, filename }) => {
             <div className={styles.icon}>
                 <i className={classColor}>{ext}</i>
                 {isImage(ext) ? (
-                    <Image alt="File" className={styles.image} src={imageUrl} />
+                    <img alt="File" className={styles.image} src={imageUrl} />
                 ) : (
                     <FileTextOutlined />
                 )}

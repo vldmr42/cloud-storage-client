@@ -2,7 +2,6 @@ import { GetServerSidePropsContext, NextPage } from 'next';
 import { checkAuth } from '@/utils/checkAuth';
 import React from 'react';
 import Layout from '@/layouts/Layout';
-import styles from '@/styles/Home.module.scss';
 import { Button, Menu } from 'antd';
 import { useRouter } from 'next/router';
 import {
@@ -12,7 +11,16 @@ import {
 } from '@ant-design/icons';
 import UploadButton from '@/components/UploadButton';
 
-const DashboardPage: NextPage = () => {
+import * as Api from '@/api';
+import styles from '@/styles/Home.module.scss';
+import { FileItem } from '@/api/dto/files.dto';
+import FileList from '@/components/FileList';
+
+interface Props {
+    items: FileItem[];
+}
+
+const DashboardPage: NextPage<Props> = ({ items }) => {
     const router = useRouter();
     const selectedMenu = router.pathname;
 
@@ -47,7 +55,7 @@ const DashboardPage: NextPage = () => {
                 ></Menu>
             </div>
             <div className="container">
-                <h1>Files</h1>
+                <FileList items={items} />
             </div>
         </main>
     );
@@ -65,9 +73,15 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         return authProps;
     }
 
-    return {
-        props: {},
-    };
+    try {
+        const items = await Api.files.getAll();
+
+        return { props: { items } };
+    } catch (err) {
+        console.log(err);
+
+        return { props: { items: [] } };
+    }
 };
 
 export default DashboardPage;
