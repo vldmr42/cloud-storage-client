@@ -11,9 +11,17 @@ interface FilesProps {
 
 export const Files: React.FC<FilesProps> = ({ items, withActions }) => {
     const [files, setFiles] = React.useState(items || []);
+    const [selectedIds, setSelectedIds] = React.useState<number[]>([]);
+
+    const onFileSelect = (id: number, type: 'select' | 'unselect') => {
+        if (type === 'select') {
+            setSelectedIds((prev) => [...prev, id]);
+        } else {
+            setSelectedIds((prev) => prev.filter((_id) => _id != id));
+        }
+    };
 
     const onClickRemove = () => {};
-    // const onFileSelect = (id:number, type: "select" | "unselect") => {}
     const onClickShare = () => {
         alert('share');
     };
@@ -25,10 +33,10 @@ export const Files: React.FC<FilesProps> = ({ items, withActions }) => {
                         <FileActions
                             onClickRemove={onClickRemove}
                             onClickShare={onClickShare}
-                            isActive
+                            isActive={selectedIds.length > 0}
                         />
                     )}
-                    <FileList items={files} />
+                    <FileList items={files} onFileSelect={onFileSelect} />
                 </>
             ) : (
                 <Empty

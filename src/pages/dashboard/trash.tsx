@@ -7,6 +7,7 @@ import * as Api from '@/api';
 import { FileItem } from '@/api/dto/files.dto';
 import FileList from '@/components/FileList';
 import DashboardLayot from '@/layouts/DashboardLayot';
+import Files from '@/modules/Files';
 
 interface Props {
     items: FileItem[];
@@ -15,7 +16,7 @@ interface Props {
 const DashboardTrash: NextPage<Props> = ({ items }) => {
     return (
         <DashboardLayot>
-            <FileList items={items} />
+            <Files items={items} />
         </DashboardLayot>
     );
 };
