@@ -12,7 +12,7 @@ interface Props {
     items: FileItem[];
 }
 
-const DashboardPage: NextPage<Props> = ({ items }) => {
+const DashboardPhotos: NextPage<Props> = ({ items }) => {
     return (
         <DashboardLayot>
             <FileList items={items} />
@@ -21,7 +21,7 @@ const DashboardPage: NextPage<Props> = ({ items }) => {
 };
 
 // @ts-expect-error Property 'getLayout' does not exist on type 'FunctionComponent'
-DashboardPage.getLayout = (page: React.ReactNode) => {
+DashboardPhotos.getLayout = (page: React.ReactNode) => {
     return <Layout title="Dashboard">{page}</Layout>;
 };
 
@@ -33,7 +33,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     }
 
     try {
-        const items = await Api.files.getAll();
+        const items = await Api.files.getAll('photos');
 
         return { props: { items } };
     } catch (err) {
@@ -43,4 +43,4 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     }
 };
 
-export default DashboardPage;
+export default DashboardPhotos;
