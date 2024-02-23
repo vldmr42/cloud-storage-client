@@ -10,8 +10,9 @@ const UploadButton: React.FC = () => {
 
     const onUploadSucces = async (options: any) => {
         try {
-            const file = await Api.files.uploadFile(options);
+            await Api.files.uploadFile(options);
             setFileList([]);
+            window.location.reload();
         } catch (err) {
             notification.error({
                 message: 'Error',

@@ -4,6 +4,8 @@ import FileList from '@/components/FileList';
 import { Empty } from 'antd';
 import React from 'react';
 
+import * as Api from '@/api';
+
 interface FilesProps {
     items: FileItem[];
     withActions?: boolean;
@@ -21,7 +23,15 @@ export const Files: React.FC<FilesProps> = ({ items, withActions }) => {
         }
     };
 
-    const onClickRemove = () => {};
+    console.log(selectedIds);
+
+    const onClickRemove = () => {
+        setSelectedIds([]);
+        setFiles((prev) =>
+            prev.filter((file) => !selectedIds.includes(file.id))
+        );
+        Api.files.remove(selectedIds);
+    };
     const onClickShare = () => {
         alert('share');
     };
